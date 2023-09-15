@@ -12,12 +12,20 @@ jobs:
     runs-on: windows-latest
     steps:
       #- uses: actions/checkout@v2
-      - uses: azure/actions/setup-azure@v1
-        with:
-          azure-subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          azure-tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          azure-client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          azure-client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-      - run: |
-          terraform init
-          terraform apply
+      - name : Checkout
+        uses: actions/checkout@v3
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -input=false  
+        
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -input=false
