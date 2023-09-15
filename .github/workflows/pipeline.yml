@@ -18,6 +18,11 @@ jobs:
     steps:
       - name: HashiCorp - Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.3
+        with :
+          azure-subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          azure-tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          azure-client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          azure-client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
   
       #- uses: actions/checkout@v2
       - name : Checkout
