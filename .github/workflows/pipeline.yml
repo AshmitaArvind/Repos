@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest-with-docker
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: azure/actions/setup-azure@v1
